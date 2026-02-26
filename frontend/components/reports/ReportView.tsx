@@ -3,7 +3,7 @@ import { FileText, Settings, RefreshCw } from 'lucide-react';
 
 import { cn } from '../utils/utils';
 import { Tab } from '../../store';
-import { ReportOptionsRegistry } from '../reportOptions/registry';
+import { ReportOptionsRegistry } from '../utils/registry';
 import StimulsoftViewer from './StimulsoftViewer';
 
 interface ReportViewProps {

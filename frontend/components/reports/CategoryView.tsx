@@ -1,6 +1,6 @@
 import React from 'react';
 import { Lock } from 'lucide-react';
-import { reportItems } from './menuData';
+import { reportItems } from '../utils/menuData';
 import { cn } from '../utils/utils';
 
 interface CategoryViewProps {

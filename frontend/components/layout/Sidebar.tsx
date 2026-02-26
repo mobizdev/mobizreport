@@ -1,5 +1,5 @@
 import React from 'react';
-import { sidebarItems } from '../reports/menuData';
+import { sidebarItems } from '../utils/menuData';
 import { cn } from '../utils/utils';
 
 interface SidebarProps {

@@ -1,4 +1,4 @@
-import BukuBesarOptions from "./BukuBesarOptions";
+import BukuBesarOptions from "../reportOptions/BukuBesarOptions";
 
 const getCurrentPeriod = () => {
     const now = new Date();

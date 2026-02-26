@@ -10,8 +10,8 @@ import Sidebar from './layout/Sidebar';
 import TabHeader from './layout/TabHeader';
 import CategoryView from './reports/CategoryView';
 import ReportView from './reports/ReportView';
-import { sidebarItems, reportItems } from './reports/menuData';
-import { ReportDefaultFilters } from './reportOptions/registry';
+import { sidebarItems, reportItems } from './utils/menuData';
+import { ReportDefaultFilters } from './utils/registry';
 import Toast from './ui/Toast';
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
