@@ -1,0 +1,57 @@
+# Dependencies
+node_modules/
+**/node_modules/
+.pnp
+.pnp.*
+.yarn/
+
+# Next.js build output
+.next/
+**/frontend/.next/
+**/frontend/out/
+
+# Production build
+dist/
+build/
+**/dist/
+**/build/
+*.tgz
+
+# Environment files
+.env
+.env*
+**/.env
+**/.env*
+!.env.example
+
+# Logs
+*.log
+**/*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+bun-debug.log*
+.pnpm-debug.log*
+
+# Testing
+coverage/
+**/coverage/
+*.lcov
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.suo
+*.sw?
+.vercel/
+.cache/
+.eslintcache
+*.tsbuildinfo
+
+# Project specific
+next-env.d.ts
+
+requirement.md
+update_requirement.md
