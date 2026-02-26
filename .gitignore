@@ -55,3 +55,4 @@ next-env.d.ts
 
 requirement.md
 update_requirement.md
+backend/package-lock.json
