@@ -1,11 +1,11 @@
 {
   "ReportVersion": "2025.1.6",
-  "ReportGuid": "3639a0bd2063b7e001129d2f7df60468",
+  "ReportGuid": "0fcaabad9f000fcdfc292e3cc99ac796",
   "ReportName": "Report",
   "ReportAlias": "Report",
-  "ReportFile": "buku-besar2.mrt",
+  "ReportFile": "buku-besar.mrt",
   "ReportCreated": "/Date(1772002594000+0700)/",
-  "ReportChanged": "/Date(1772015813000+0700)/",
+  "ReportChanged": "/Date(1772157259000+0700)/",
   "EngineVersion": "EngineV2",
   "ReportUnit": "Centimeters",
   "CalculationMode": "Interpretation",
@@ -517,7 +517,7 @@
           "Ident": "StiGroupHeaderBand",
           "Name": "GroupHeader1",
           "CanGrow": true,
-          "ClientRectangle": "0,6,27.7,1.4",
+          "ClientRectangle": "0,6,27.7,1.2",
           "Interaction": {
             "Ident": "StiBandInteraction"
           },
@@ -648,7 +648,7 @@
           "Ident": "StiDataBand",
           "Name": "Detail",
           "CanGrow": true,
-          "ClientRectangle": "0,8.2,27.7,0.6",
+          "ClientRectangle": "0,8,27.7,0.6",
           "Expressions": {
             "0": {
               "Name": "CountData"
@@ -840,44 +840,10 @@
           "DataSourceName": "root"
         },
         "4": {
-          "Ident": "StiChildBand",
-          "Name": "ChildBand1",
-          "CanGrow": true,
-          "ClientRectangle": "0,9.6,27.7,0.8",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Border": ";;;;;;;solid:Black",
-          "Brush": "solid:",
-          "Components": {
-            "0": {
-              "Ident": "StiText",
-              "Name": "Text11",
-              "Guid": "193e003fb4fd672ef21e5becbeba7805",
-              "CanGrow": true,
-              "ClientRectangle": "0.8,0,4.51,0.43",
-              "Interaction": {
-                "Ident": "StiInteraction"
-              },
-              "Text": {
-                "Value": "{root.TransactionDate}"
-              },
-              "Font": "Verdana;6.75;;",
-              "Border": ";;;;;;;solid:Black",
-              "Brush": "solid:",
-              "TextBrush": "solid:Black",
-              "TextOptions": {
-                "WordWrap": true
-              },
-              "Type": "DataColumn"
-            }
-          }
-        },
-        "5": {
           "Ident": "StiGroupFooterBand",
           "Name": "GroupFooter1",
           "CanGrow": true,
-          "ClientRectangle": "0,11.2,27.7,0.8",
+          "ClientRectangle": "0,9.4,27.7,0.8",
           "Interaction": {
             "Ident": "StiInteraction"
           },
@@ -968,22 +934,22 @@
             }
           }
         },
-        "6": {
+        "5": {
           "Ident": "StiFooterBand",
           "Name": "PageFooter",
           "CanGrow": true,
-          "ClientRectangle": "0,12.8,27.7,0.8",
+          "ClientRectangle": "0,11,27.7,0.8",
           "Interaction": {
             "Ident": "StiInteraction"
           },
           "Border": ";;;;;;;solid:Black",
           "Brush": "solid:"
         },
-        "7": {
+        "6": {
           "Ident": "StiReportSummaryBand",
           "Name": "ReportFooter",
           "CanGrow": true,
-          "ClientRectangle": "0,14.4,27.7,0.8",
+          "ClientRectangle": "0,12.6,27.7,0.8",
           "Interaction": {
             "Ident": "StiInteraction"
           },

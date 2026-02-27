@@ -54,7 +54,7 @@ export default function StimulsoftViewer({ reportName, data }: StimulsoftViewerP
 
                     const dataSet = new Stimulsoft.System.Data.DataSet("root");
                     dataSet.readJson(wrappedData);
-                    
+                    report.dictionary.clear();
                     // Register under multiple names to match common MRT configurations
                     report.regData("root", "root", dataSet);
                     report.regData("Data", "Data", dataSet);
