@@ -19,6 +19,7 @@ interface ReportInputProps {
     onLookup?: () => void;
     className?: string;
     containerClassName?: string;
+    required?: boolean;
 }
 
 export default function ReportInput({
@@ -30,12 +31,13 @@ export default function ReportInput({
     disabled = false,
     onLookup,
     className,
-    containerClassName
+    containerClassName,
+    required
 }: ReportInputProps) {
     return (
         <div className={cn("flex-1 flex flex-col gap-1", containerClassName)}>
             <label className="text-[10px] font-bold text-slate-900 uppercase">
-                {label}
+                {label} {required && <span className="text-red-500">*</span>}
             </label>
             <div className="flex items-center gap-1">
                 <input 
