@@ -11,8 +11,8 @@ import TabHeader from './layout/TabHeader';
 import CategoryView from './reports/CategoryView';
 import ReportView from './reports/ReportView';
 import { sidebarItems, reportItems } from './utils/menuData';
-import { ReportDefaultFilters } from './utils/registry';
-import Toast from './ui/Toast';
+import { ReportDefaultFilters, ReportMandatoryFields } from './utils/registry';
+import { useToast } from './ui/ToastContext';
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
 
@@ -40,14 +40,9 @@ if (typeof window !== 'undefined') {
 export default function MainLayout({ children }: { children: React.ReactNode }) {
     const dispatch = useDispatch();
     const { tabs, activeTabId } = useSelector((state: RootState) => state.tabs);
-    const { user, company, token } = useSelector((state: RootState) => state.auth);
-    const [toast, setToast] = useState<{ message: string, type: 'error' | 'success' } | null>(null);
+    const { token } = useSelector((state: RootState) => state.auth);
     const [permissions, setPermissions] = useState<Record<number, boolean>>({});
-
-    const showToast = (message: string, type: 'error' | 'success' = 'error') => {
-        setToast({ message, type });
-        setTimeout(() => setToast(null), 4000);
-    };
+    const { showToast } = useToast();
 
     // Fetch permissions
     useEffect(() => {
@@ -113,6 +108,15 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
         console.log("state", state);
         
         if (!state) return;
+
+        const currentTab = tabs.find(t => t.id === tabId);
+        if (currentTab && ReportMandatoryFields[currentTab.contentId]) {
+            const missing = ReportMandatoryFields[currentTab.contentId].filter(field => !state.filters[field.key]);
+            if (missing.length > 0) {
+                showToast(`${missing.map(m => m.label).join(', ')} harus diisi.`, 'error');
+                return;
+            }
+        }
 
         setReportStates(prev => ({ ...prev, [tabId]: { ...prev[tabId], loading: true } }));
 
@@ -220,6 +224,12 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
     };
 
     const handleOpenReport = (report: any) => {
+        // Check if a tab for this report is already open
+        const existingTab = tabs.find(t => t.contentId === report.id && t.type === 'report');
+        if (existingTab) {
+            dispatch(setActiveTab(existingTab.id));
+            return;
+        }
         const uniqueId = `${report.id}-${Date.now()}`;
         dispatch(addTab({ id: uniqueId, contentId: report.id, title: report.title, type: 'report' }));
     };
@@ -276,13 +286,13 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             />
 
             {/* Global Toast - High Contrast and Fixed to Viewport Bottom-Right */}
-            {toast && (
+            {/* {toast && (
                 <Toast 
                     message={toast.message} 
                     type={toast.type} 
                     onClose={() => setToast(null)} 
                 />
-            )}
+            )} */}
         </div>
     );
 }

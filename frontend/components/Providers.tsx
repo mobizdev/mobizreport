@@ -2,7 +2,15 @@
 
 import { Provider } from 'react-redux';
 import { store } from '../store';
+import { ToastProvider } from './ui/ToastContext';
 
 export function Providers({ children }: { children: React.ReactNode }) {
-    return <Provider store={store}>{children}</Provider>;
+    // Wrap Redux Provider with ToastProvider
+    return (
+        <Provider store={store}>
+            <ToastProvider>
+                {children}
+            </ToastProvider>
+        </Provider>
+    );
 }

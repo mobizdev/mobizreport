@@ -1,7 +1,7 @@
 import React from 'react';
 import { X, AlertCircle, CheckCircle } from 'lucide-react';
 
-interface ToastProps {
+export interface ToastProps {
     message: string;
     type: 'error' | 'success';
     onClose: () => void;

@@ -51,3 +51,24 @@ export const ReportDefaultFilters: Record<string, any> = {
         bankAccountId: ''
     }
 };
+
+export const ReportMandatoryFields: Record<string, { key: string, label: string }[]> = {
+    'buku-besar': [
+        { key: 'startDate', label: 'Tanggal Awal' },
+        { key: 'endDate', label: 'Tanggal Akhir' },
+        { key: 'startAccountCode', label: 'Kode Akun Awal' },
+        { key: 'endAccountCode', label: 'Kode Akun Akhir' }
+    ],
+    'laba-rugi-jw': [
+        { key: 'startDate', label: 'Tanggal Awal' },
+        { key: 'endDate', label: 'Tanggal Akhir' }
+    ],
+    'neraca-ht': [
+        { key: 'date', label: 'Tanggal' }
+    ],
+    'mutasi-bank': [
+        { key: 'startDate', label: 'Tanggal Awal' },
+        { key: 'endDate', label: 'Tanggal Akhir' },
+        { key: 'bankAccountId', label: 'Akun Bank' }
+    ]
+};

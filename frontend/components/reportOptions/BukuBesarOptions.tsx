@@ -43,8 +43,8 @@ export default function BukuBesarOptions({ filters, onUpdateFilter, onLookup }: 
                         </select>
                     </div>
                     <div className="flex gap-2">
-                        <ReportInput label="Dari Tanggal" type="date" value={filters.startDate} onChange={(val) => onUpdateFilter('startDate', val)} disabled={filters.dateRangeType !== 'Custom'} />
-                        <ReportInput label="Sampai Tanggal" type="date" value={filters.endDate} onChange={(val) => onUpdateFilter('endDate', val)} disabled={filters.dateRangeType !== 'Custom'} />
+                        <ReportInput label="Dari Tanggal" type="date" value={filters.startDate} onChange={(val) => onUpdateFilter('startDate', val)} disabled={filters.dateRangeType !== 'Custom'} required />
+                        <ReportInput label="Sampai Tanggal" type="date" value={filters.endDate} onChange={(val) => onUpdateFilter('endDate', val)} disabled={filters.dateRangeType !== 'Custom'} required />
                     </div>
                 </div>
             </div>
@@ -66,8 +66,8 @@ export default function BukuBesarOptions({ filters, onUpdateFilter, onLookup }: 
                     {
                         filters.accountSelectionType !== 'Semua Akun' && (
                             <div className="flex gap-2">
-                                <ReportInput label="Dari Akun" value={filters.startAccountCode} onChange={(val) => onUpdateFilter('startAccountCode', val)} disabled={filters.accountSelectionType === 'Semua Akun'} placeholder="100000" onLookup={() => onLookup('startAccountCode')} />
-                                <ReportInput label="Sampai Akun" value={filters.endAccountCode} onChange={(val) => onUpdateFilter('endAccountCode', val)} disabled={filters.accountSelectionType === 'Semua Akun' || filters.accountSelectionType === 'Sendiri'} placeholder="710301" onLookup={() => onLookup('endAccountCode')} />
+                                <ReportInput label="Dari Akun" value={filters.startAccountCode} onChange={(val) => onUpdateFilter('startAccountCode', val)} disabled={filters.accountSelectionType === 'Semua Akun'} placeholder="100000" onLookup={() => onLookup('startAccountCode')} required />
+                                <ReportInput label="Sampai Akun" value={filters.endAccountCode} onChange={(val) => onUpdateFilter('endAccountCode', val)} disabled={filters.accountSelectionType === 'Semua Akun' || filters.accountSelectionType === 'Sendiri'} placeholder="710301" onLookup={() => onLookup('endAccountCode')} required />
                             </div>
                         )
                     }
