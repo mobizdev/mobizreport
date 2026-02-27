@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, addTab, removeTab, setActiveTab, Tab } from '../store';
 import StimulsoftDesigner from './reports/StimulsoftDesigner';
-import COALookupModal from './ui/COALookupModal';
 import axios from 'axios';
 import Sidebar from './layout/Sidebar';
 import TabHeader from './layout/TabHeader';
@@ -76,16 +75,6 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
         loading: boolean,
         filters: any
     }>>({});
-
-    const [lookupConfig, setLookupConfig] = useState<{
-        isOpen: boolean;
-        tabId: string;
-        targetField: 'startAccountCode' | 'endAccountCode';
-    }>({
-        isOpen: false,
-        tabId: '',
-        targetField: 'startAccountCode'
-    });
 
     const activeTab = tabs.find(t => t.id === activeTabId);
 
@@ -277,30 +266,11 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                                 reportState={reportStates[activeTab.id]}
                                 onUpdateFilter={(key, value) => updateFilter(activeTab.id, key, value)}
                                 onRefresh={() => handleRefresh(activeTab.id)}
-                                onLookup={(field) => setLookupConfig({ isOpen: true, tabId: activeTab.id, targetField: field })}
                             />
                         ) : null}
                     </div>
                 </main>
             </div>
-
-            <COALookupModal 
-                isOpen={lookupConfig.isOpen}
-                onClose={() => setLookupConfig(prev => ({ ...prev, isOpen: false }))}
-                onSelect={(coa) => {
-                    updateFilter(lookupConfig.tabId, lookupConfig.targetField, coa.AccountCode);
-                    setLookupConfig(prev => ({ ...prev, isOpen: false }));
-                }}
-            />
-
-            {/* Global Toast - High Contrast and Fixed to Viewport Bottom-Right */}
-            {/* {toast && (
-                <Toast 
-                    message={toast.message} 
-                    type={toast.type} 
-                    onClose={() => setToast(null)} 
-                />
-            )} */}
         </div>
     );
 }

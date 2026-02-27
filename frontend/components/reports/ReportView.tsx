@@ -15,10 +15,9 @@ interface ReportViewProps {
     } | undefined;
     onUpdateFilter: (key: string, value: string) => void;
     onRefresh: () => void;
-    onLookup: (field: 'startAccountCode' | 'endAccountCode') => void;
 }
 
-export default function ReportView({ tab, reportState, onUpdateFilter, onRefresh, onLookup }: ReportViewProps) {
+export default function ReportView({ tab, reportState, onUpdateFilter, onRefresh }: ReportViewProps) {
     const [isOptionsExpanded, setIsOptionsExpanded] = useState(true);
 
     const renderOptions = () => {
@@ -30,7 +29,6 @@ export default function ReportView({ tab, reportState, onUpdateFilter, onRefresh
                 <OptionsComponent 
                     filters={reportState.filters}
                     onUpdateFilter={onUpdateFilter}
-                    onLookup={onLookup}
                 />
             );
         }

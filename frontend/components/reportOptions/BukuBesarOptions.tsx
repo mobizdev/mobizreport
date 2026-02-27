@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReportInput from '../ui/ReportInput';
+import COALookupModal from '../ui/COALookupModal';
 
 interface BukuBesarOptionsProps {
     filters: any;
     onUpdateFilter: (key: string, value: string) => void;
-    onLookup: (field: string) => void;
 }
 
-export default function BukuBesarOptions({ filters, onUpdateFilter, onLookup }: BukuBesarOptionsProps) {
+export default function BukuBesarOptions({ filters, onUpdateFilter }: BukuBesarOptionsProps) {
+    const [isLookupOpen, setIsLookupOpen] = useState(false);
+    const [lookupField, setLookupField] = useState<string>('');
+
     const handleAccountCriteriaChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const value = e.target.value;
         onUpdateFilter('accountSelectionType', value);
@@ -21,6 +24,11 @@ export default function BukuBesarOptions({ filters, onUpdateFilter, onLookup }: 
         else if (value === 'Sendiri') {
             onUpdateFilter('endAccountCode', filters.startAccountCode);
         } 
+    };
+
+    const handleLookup = (field: string) => {
+        setLookupField(field);
+        setIsLookupOpen(true);
     };
 
     return (
@@ -66,8 +74,8 @@ export default function BukuBesarOptions({ filters, onUpdateFilter, onLookup }: 
                     {
                         filters.accountSelectionType !== 'Semua Akun' && (
                             <div className="flex gap-2">
-                                <ReportInput label="Dari Akun" value={filters.startAccountCode} onChange={(val) => onUpdateFilter('startAccountCode', val)} disabled={filters.accountSelectionType === 'Semua Akun'} placeholder="100000" onLookup={() => onLookup('startAccountCode')} required />
-                                <ReportInput label="Sampai Akun" value={filters.endAccountCode} onChange={(val) => onUpdateFilter('endAccountCode', val)} disabled={filters.accountSelectionType === 'Semua Akun' || filters.accountSelectionType === 'Sendiri'} placeholder="710301" onLookup={() => onLookup('endAccountCode')} required />
+                                <ReportInput label="Dari Akun" value={filters.startAccountCode} onChange={(val) => onUpdateFilter('startAccountCode', val)} disabled={filters.accountSelectionType === 'Semua Akun'} placeholder="100000" onLookup={() => handleLookup('startAccountCode')} required />
+                                <ReportInput label="Sampai Akun" value={filters.endAccountCode} onChange={(val) => onUpdateFilter('endAccountCode', val)} disabled={filters.accountSelectionType === 'Semua Akun' || filters.accountSelectionType === 'Sendiri'} placeholder="710301" onLookup={() => handleLookup('endAccountCode')} required />
                             </div>
                         )
                     }
@@ -86,6 +94,15 @@ export default function BukuBesarOptions({ filters, onUpdateFilter, onLookup }: 
                     </div>
                 </div>
             </div>
+            
+            <COALookupModal 
+                isOpen={isLookupOpen}
+                onClose={() => setIsLookupOpen(false)}
+                onSelect={(coa) => {
+                    onUpdateFilter(lookupField, coa.AccountCode);
+                    setIsLookupOpen(false);
+                }}
+            />
         </div>
     );
 }
