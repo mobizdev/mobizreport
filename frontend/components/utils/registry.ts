@@ -72,3 +72,10 @@ export const ReportMandatoryFields: Record<string, { key: string, label: string 
         { key: 'bankAccountId', label: 'Akun Bank' }
     ]
 };
+
+export const ReportEndpoints: Record<string, string> = {
+    'buku-besar': '/reports/ledger-list',
+    'laba-rugi-jw': '/reports/profit-loss',
+    'neraca-ht': '/reports/balance-sheet',
+    'mutasi-bank': '/reports/bank-mutation'
+};

@@ -11,7 +11,7 @@ import TabHeader from './layout/TabHeader';
 import CategoryView from './reports/CategoryView';
 import ReportView from './reports/ReportView';
 import { sidebarItems, reportItems } from './utils/menuData';
-import { ReportDefaultFilters, ReportMandatoryFields } from './utils/registry';
+import { ReportDefaultFilters, ReportMandatoryFields, ReportEndpoints } from './utils/registry';
 import { useToast } from './ui/ToastContext';
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
@@ -110,7 +110,9 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
         if (!state) return;
 
         const currentTab = tabs.find(t => t.id === tabId);
-        if (currentTab && ReportMandatoryFields[currentTab.contentId]) {
+        if (!currentTab) return;
+
+        if (ReportMandatoryFields[currentTab.contentId]) {
             const missing = ReportMandatoryFields[currentTab.contentId].filter(field => !state.filters[field.key]);
             if (missing.length > 0) {
                 showToast(`${missing.map(m => m.label).join(', ')} harus diisi.`, 'error');
@@ -118,10 +120,16 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             }
         }
 
+        const endpoint = ReportEndpoints[currentTab.contentId];
+        if (!endpoint) {
+            showToast("Endpoint laporan belum dikonfigurasi.", 'error');
+            return;
+        }
+
         setReportStates(prev => ({ ...prev, [tabId]: { ...prev[tabId], loading: true } }));
 
         try {
-            const response = await axios.get(`${BACKEND_URL}/reports/ledger-list`, {
+            const response = await axios.get(`${BACKEND_URL}${endpoint}`, {
                 params: state.filters,
                 headers: { Authorization: `Bearer ${token}` }
             });
